@@ -31,6 +31,8 @@ Chaque unité a un temps de construction.
 Chaque unité possède des caractéristiques:
 - vitesse de déplacement
 - portée d'attaque / minage
+- nb d'attaque par tour
+- vitesse de minage
 - puissance d'attaque / de minage
 - capacité de transport (nb d'unités de minerai)
 - points de vie
@@ -73,6 +75,33 @@ L'interface joueur doit pouvoir:
 	- temps réel ou temps accéléré, gestion de pause, possibilité de revenir à un tour précédent
 	- visualiser les commandes transmises au serveur et les erreurs remontées par le serveur
 - de pouvoir visualiser les parties d'autres joueurs (?)
+
+----
+
+**Serveur**
+
+***Considérations générales***
+
+Le serveur a pour but de:
+- gérer une persistance d'information (joueurs, résultats, configuration, ....)
+- fournir des informations à l'IHM
+- lancer des matchs entre joueurs
+- veiller à la stabilité et à la sécurité du système
+- être en capacité d'exécuter du code externe dans différents langages
+
+***Stabilité & Sécurité***
+
+Le serveur va devoir exécuter du code dont il n'est pas le propriétaire.
+Il est tout à fait entendable que des personnes tentent d'injecter du code malveillant, dans des buts de triche, ou tout simplement de malveillance.
+Il est tout à fait possible que du code soit injecté, alors que sa bonne exécution n'ait pas été validée:
+- Code ne compilant pas
+- Code sans output
+- Code avec des boucles infinies
+- Code surconsommant CPU & mémoire
+
+Le serveur aura besoin de gérer toutes ces problématiques de sécurité, de surveillance et de monitoring du code externe exécuté.
+
+
 
 
 ----
