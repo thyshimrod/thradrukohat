@@ -51,12 +51,36 @@ L'instance transmet aux joueurs des données génériques sur la configuration du j
 
 **Tour de jeu**
 
+***Input***
+
 L'instance transmet aux joueurs les données des éléments dans le champ de vision du joueur (au travers de ses structures et de ses unités).
 L'instance transmet une liste de valeurs pour décrire chaque case visible. Pour chaque case visible, elle transmet son contenu:
 - vide
 - unité ou bâtiment(avec ses caractéristiques instanciées : type,armure, vie et propriétaire)
 - Minerai (nombre restant à récolter)
 - rocher (obstacle)
+
+
+***Gestion des ordres***
+
+Question ?
+- un tir sur une autre unité est géré sur sa position initiale ou sa position finale (si l'unité ennemie a lancé un mouvement de deux cases, au bout des 2 cases elle est hors de portée, alors qu'elle était à portée initialement et au mouvement 1 également).
+- si une unité a 3 de mouvements, et une 2e 1, la 2e s'arrête dans le chemin tracé par la 1ere, que se passe-t-il?
+
+2 options:
+- simple
+	- on résout uniquement les états finaux
+	- le tir est résolu sur l'unité en fin de déplacement
+	- les collisions sont gérés sur la fin de déplacement uniquement
+	- l'ordre des ordres passées à une unité n'a pas d'importance, on résout mouvement puis tir
+- complexe
+	- on découpe un tour en 100 unités
+	- si une unité à 4 actions (2 mvts et 2 tirs), chaque action se tient dans une portion de tour (25,50,75 et 100)
+	- chaque action est résolue dans le laps de temps lui correspondant, et on recherche chez l'ennemi son état dans cette fraction de tour.
+	- l'ordre des ordres passés est important
+	- en cas d'obstruction, que fait on des ordres suivants (notamment de déplacement)
+	
+
 
 
 ----
